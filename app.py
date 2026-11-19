@@ -615,20 +615,60 @@ with tab_geo:
             valid_coords = valid_coords.sample(2000, random_state=42)
 
         if not valid_coords.empty:
-            fig_map = px.scatter_mapbox(
-                valid_coords,
-                lat=valid_coords['Drop_Latitude'].abs(),
-                lon=valid_coords['Drop_Longitude'].abs(),
-                color='Delivery_Time',
-                size='Distance_KM',
-                color_continuous_scale="Viridis",
-                range_color=[30, 200],
-                zoom=4.5,
-                center=dict(lat=21.0, lon=78.0),
-                mapbox_style="carto-positron",
-                hover_data={'Area': True, 'Weather': True, 'Traffic': True, 'Vehicle': True, 'Delivery_Time': True},
-                title="Geographic Drop Locations & Delivery Durations"
-            )
+            fig_map = None
+            lat_s = valid_coords['Drop_Latitude'].abs()
+            lon_s = valid_coords['Drop_Longitude'].abs()
+
+            # Modern Plotly 6.0+ uses scatter_map, earlier versions use scatter_mapbox
+            if hasattr(px, 'scatter_map'):
+                try:
+                    fig_map = px.scatter_map(
+                        valid_coords,
+                        lat=lat_s,
+                        lon=lon_s,
+                        color='Delivery_Time',
+                        size='Distance_KM',
+                        color_continuous_scale="Viridis",
+                        range_color=[30, 200],
+                        zoom=4.5,
+                        center=dict(lat=21.0, lon=78.0),
+                        hover_data={'Area': True, 'Weather': True, 'Traffic': True, 'Vehicle': True, 'Delivery_Time': True},
+                        title="Geographic Drop Locations & Delivery Durations"
+                    )
+                except Exception:
+                    fig_map = None
+
+            if fig_map is None and hasattr(px, 'scatter_mapbox'):
+                try:
+                    fig_map = px.scatter_mapbox(
+                        valid_coords,
+                        lat=lat_s,
+                        lon=lon_s,
+                        color='Delivery_Time',
+                        size='Distance_KM',
+                        color_continuous_scale="Viridis",
+                        range_color=[30, 200],
+                        zoom=4.5,
+                        center=dict(lat=21.0, lon=78.0),
+                        mapbox_style="carto-positron",
+                        hover_data={'Area': True, 'Weather': True, 'Traffic': True, 'Vehicle': True, 'Delivery_Time': True},
+                        title="Geographic Drop Locations & Delivery Durations"
+                    )
+                except Exception:
+                    fig_map = None
+
+            if fig_map is None:
+                fig_map = px.scatter(
+                    valid_coords,
+                    x=lon_s,
+                    y=lat_s,
+                    color='Delivery_Time',
+                    size='Distance_KM',
+                    color_continuous_scale="Viridis",
+                    labels={'x': 'Longitude (°E)', 'y': 'Latitude (°N)'},
+                    title="Geographic Drop Locations & Delivery Durations"
+                )
+
             fig_map.update_layout(margin=dict(l=10, r=10, t=40, b=10), height=460)
             st.plotly_chart(fig_map, use_container_width=True)
         else:
