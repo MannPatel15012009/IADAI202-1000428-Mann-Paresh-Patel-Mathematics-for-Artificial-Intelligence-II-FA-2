@@ -169,14 +169,4 @@ To provide logistics managers with actionable foresight, a machine learning pipe
 
 ---
 
-## 🏆 Assessment Rubric Compliance Checklist (Distinguished - 20/20 Marks)
-
-| Criteria | Max Marks | Targeted Standard | Demonstrated Implementation | Status |
-|---|:---:|---|---|:---:|
-| **Data cleaning & preparation** | **5** | **Distinguished (5):** Fully cleans and prepares data; handles missing values properly; calculates all required metrics (avg delivery time, % late); groups data correctly to power visuals. | Cleaned 54 rating nulls and 91 weather/traffic artifacts; engineered Haversine route distance, age groups, prep times, and dynamic late delivery threshold ($\mu + 1\sigma = 176.82\text{m}$). | **5 / 5** ✅ |
-| **Build planned visualizations** | **10** | **Distinguished (10):** Implements all 5 compulsory charts clearly and correctly; visuals are well-labeled and meaningful; may also include optional charts. | All **5 Compulsory Visuals** implemented with interactive Plotly graphs, OLS trendlines, and insight badges + **4 Optional Visuals** (temporal trend, KDE histogram, % delay matrix, fleet breakdown) + **Geospatial GPS Scatter Map**. | **10 / 10** ✅ |
-| **Streamlit interface & deployment** | **5** | **Distinguished (5):** Dashboard matches storyboard; includes working sidebar filters; visuals update live; well-structured code; successfully deployed on Streamlit Cloud with public URL and GitHub repo. | Executive dashboard styled after FA-1 storyboard; 6 live reactive sidebar filters; full predictive AI dispatch simulator; modular code (`app.py`, `data_processor.py`, `train_model.py`); ready for 1-click Streamlit Cloud deployment. | **5 / 5** ✅ |
-| **TOTAL** | **20** | **Distinguished Level** | **20 / 20** | **100%** 🎯 |
-
----
 *Created by Mann Paresh Patel (WACP Reg No: 1000428) for Mathematics for AI-II Formative Assessment-2.*
