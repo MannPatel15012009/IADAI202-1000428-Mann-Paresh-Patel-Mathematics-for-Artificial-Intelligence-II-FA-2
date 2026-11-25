@@ -1,7 +1,6 @@
 # 🚚 LogiSight Analytics: Last-Mile Delivery Decision Dashboard
 
-🌐 **Live App:** https://ig69l8k95fdkvgvuzfevo6.streamlit.app/
-
+🌐 **Live App:** https://qckdepeuzdnbddcwtiofsq.streamlit.app/
 ### Formative Assessment-2 (FA-2) | Mathematics for AI-II
 **CRS:** Artificial Intelligence  
 **Student Name:** Mann Paresh Patel  
